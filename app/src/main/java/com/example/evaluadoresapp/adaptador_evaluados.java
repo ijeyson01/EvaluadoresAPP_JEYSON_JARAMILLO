@@ -1,6 +1,7 @@
 package com.example.evaluadoresapp;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,12 +38,11 @@ public class adaptador_evaluados extends RecyclerView.Adapter<evaluadosviewholde
         holder.cargo.setText(usuario.getCargo());
         holder.fechainicio.setText(usuario.getFechainicio());
         holder.fechafin.setText(usuario.getFechafin());
-
         Glide.with(Ctx)
-                .load(usuario.getUrlimg1())
+                .load(usuario.getUrlimg2())
+                .error(R.drawable.unknown)
                 .into(holder.avatarUrl);
     }
-
     @Override
     public int getItemCount() {
         final int size = lstEvaluados.size();

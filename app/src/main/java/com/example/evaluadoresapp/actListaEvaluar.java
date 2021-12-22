@@ -1,6 +1,8 @@
 package com.example.evaluadoresapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -35,7 +37,7 @@ import javax.net.ssl.X509TrustManager;
 
 public class actListaEvaluar extends AppCompatActivity {
     public String identificacionEva;
-    public static  String URL1 = "https://uealecpeterson.net/ws/listadoaevaluar.php?e=";
+    //public static  String URL1 = "https://uealecpeterson.net/ws/listadoaevaluar.php?e=";
     RecyclerView recyclerView;
     RequestQueue rq;
     ArrayList<c_Evaluados> lstEval;
@@ -47,13 +49,17 @@ public class actListaEvaluar extends AppCompatActivity {
         handleSSLHandshake();
         jsonObjectRequest();
         //TextView lblNombre = (TextView)findViewById(R.id.textView);
-
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void jsonObjectRequest(){
         Bundle bundle = this.getIntent().getExtras();
         identificacionEva = bundle.getString("vIdentificacionEva");
-        URL1 +=identificacionEva;
+        String URL1 ="https://uealecpeterson.net/ws/listadoaevaluar.php?e="+identificacionEva;
+        System.out.println(URL1);
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL1,

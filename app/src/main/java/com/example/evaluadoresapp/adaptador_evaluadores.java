@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableResource;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,12 +59,16 @@ implements View.OnClickListener{
         holder.textViewName.setText(usuario.getNombre());
         holder.textarea.setText(usuario.getArea());
         holder.textideEvaluador.setText(usuario.getIdEv());
+        try {
+            Glide.with(Ctx)
+                    .load(usuario.getUrlImg2())
+                    .error(R.drawable.unknown)
+                    .into(holder.imageView)
 
-        Glide.with(Ctx)
-                .load(usuario.getUrlImg1())
-                .into(holder.imageView)
-        ;//(Drawable("https://evaladmin.uteq.edu.ec/adminimg/unknown.png"));
+            ;//(Drawable("https://evaladmin.uteq.edu.ec/adminimg/unknown.png"));
+        }catch(Exception ex){
 
+        }
 
     }
     private View.OnClickListener Listener;
